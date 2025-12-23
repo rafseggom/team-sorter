@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './InitialConfig.css';
+import faviconImg from '../assets/favicon.png';
 
 export default function InitialConfig({ onNext }) {
   const [numTeams, setNumTeams] = useState(2);
@@ -51,7 +52,11 @@ export default function InitialConfig({ onNext }) {
 
   return (
     <div className="config-container">
-      <h1>Team Sorter</h1>
+      <h1>
+        <img src={faviconImg} alt="" className="title-icon" />
+        Team Sorter
+        <img src={faviconImg} alt="" className="title-icon" />
+      </h1>
       <form onSubmit={handleSubmit} className="config-form">
         <div className="form-group">
           <label htmlFor="numTeams">Número de equipos:</label>
