@@ -57,11 +57,37 @@
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
+.player-count-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  gap: 1rem;
+}
+
 .help-text {
   display: block;
-  margin-top: 0.5rem;
   color: var(--text-secondary);
   font-size: 0.85rem;
+}
+
+.current-count {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.current-count.not-enough {
+  color: var(--accent-warning);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.current-count.enough {
+  color: var(--accent-success);
+  background: rgba(16, 185, 129, 0.1);
 }
 
 .error-message {

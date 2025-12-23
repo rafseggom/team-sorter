@@ -7,6 +7,13 @@ export default function InitialConfig({ onNext }) {
   const [playerNames, setPlayerNames] = useState('');
   const [error, setError] = useState('');
 
+  const currentPlayerCount = playerNames
+    .split(',')
+    .map(name => name.trim())
+    .filter(name => name.length > 0).length;
+
+  const totalPlayers = numTeams * playersPerTeam;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
@@ -84,9 +91,14 @@ export default function InitialConfig({ onNext }) {
             onChange={(e) => setPlayerNames(e.target.value)}
             required
           />
-          <small className="help-text">
-            Total necesario: {numTeams * playersPerTeam} jugadores
-          </small>
+          <div className="player-count-info">
+            <small className="help-text">
+              Total necesario: {totalPlayers} jugadores
+            </small>
+            <small className={`current-count ${currentPlayerCount >= totalPlayers ? 'enough' : 'not-enough'}`}>
+              Introducidos: {currentPlayerCount}
+            </small>
+          </div>
         </div>
 
         {error && <div className="error-message">{error}</div>}
