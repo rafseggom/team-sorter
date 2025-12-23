@@ -58,7 +58,7 @@ function balanceTeamsGreedy(teams, ratings, maxIterations = 100) {
             const player1 = team1[p1];
             const player2 = team2[p2];
 
-            if (ratings[player1].isCaptain && ratings[player2].isCaptain) {
+            if (ratings[player1].isCaptain || ratings[player2].isCaptain) {
               continue;
             }
 

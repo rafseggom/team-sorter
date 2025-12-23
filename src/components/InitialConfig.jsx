@@ -44,7 +44,7 @@ export default function InitialConfig({ onNext }) {
 
   return (
     <div className="config-container">
-      <h1>⚽ Team Sorter</h1>
+      <h1>Team Sorter</h1>
       <form onSubmit={handleSubmit} className="config-form">
         <div className="form-group">
           <label htmlFor="numTeams">Número de equipos:</label>
@@ -92,7 +92,7 @@ export default function InitialConfig({ onNext }) {
         {error && <div className="error-message">{error}</div>}
 
         <button type="submit" className="btn-primary">
-          Siguiente →
+          Siguiente
         </button>
       </form>
     </div>

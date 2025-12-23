@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import './TeamDisplay.css';
 
 const calculateTeamRating = (team, ratings) => {
@@ -6,7 +6,49 @@ const calculateTeamRating = (team, ratings) => {
   return team.reduce((sum, player) => sum + ratings[player].rating, 0);
 };
 
-export default function TeamDisplay({ teams, config, onReset }) {
+export default function TeamDisplay({ teams: initialTeams, config, onReset }) {
+  const [teams, setTeams] = useState(initialTeams);
+  const [selectedPlayers, setSelectedPlayers] = useState([]);
+
+  const handlePlayerClick = (player, teamIndex) => {
+    const existingIndex = selectedPlayers.findIndex(p => p.player === player);
+    
+    if (existingIndex >= 0) {
+      setSelectedPlayers(selectedPlayers.filter((_, i) => i !== existingIndex));
+    } else if (selectedPlayers.length < 2) {
+      setSelectedPlayers([...selectedPlayers, { player, teamIndex }]);
+    } else {
+      setSelectedPlayers([{ player, teamIndex }]);
+    }
+  };
+
+  const handleSwap = () => {
+    if (selectedPlayers.length !== 2) return;
+
+    const [player1Info, player2Info] = selectedPlayers;
+    
+    if (player1Info.teamIndex === player2Info.teamIndex) {
+      alert('Selecciona jugadores de equipos diferentes');
+      return;
+    }
+
+    const newTeams = teams.map((team, index) => {
+      if (index === player1Info.teamIndex) {
+        return team.map(p => p === player1Info.player ? player2Info.player : p);
+      }
+      if (index === player2Info.teamIndex) {
+        return team.map(p => p === player2Info.player ? player1Info.player : p);
+      }
+      return team;
+    });
+
+    setTeams(newTeams);
+    setSelectedPlayers([]);
+  };
+
+  const canSwap = selectedPlayers.length === 2 && 
+                  selectedPlayers[0].teamIndex !== selectedPlayers[1].teamIndex;
+
   const suggestions = useMemo(() => {
     if (!config.useRating) return [];
 
@@ -63,11 +105,32 @@ export default function TeamDisplay({ teams, config, onReset }) {
 
   return (
     <div className="teams-container">
-      <h1>🎯 Equipos Generados</h1>
+      <h1>Equipos Generados</h1>
+
+      {selectedPlayers.length > 0 && (
+        <div className="swap-panel">
+          <div className="swap-info">
+            <p>
+              {selectedPlayers.length === 1 
+                ? `Seleccionado: ${selectedPlayers[0].player} (Equipo ${selectedPlayers[0].teamIndex + 1}). Selecciona otro jugador de un equipo diferente.`
+                : `${selectedPlayers[0].player} (Equipo ${selectedPlayers[0].teamIndex + 1}) ⇄ ${selectedPlayers[1].player} (Equipo ${selectedPlayers[1].teamIndex + 1})`
+              }
+            </p>
+          </div>
+          {canSwap && (
+            <button onClick={handleSwap} className="btn-swap">
+              Intercambiar
+            </button>
+          )}
+          <button onClick={() => setSelectedPlayers([])} className="btn-cancel">
+            Cancelar
+          </button>
+        </div>
+      )}
 
       {config.useRating && suggestions.length > 0 && (
         <div className="suggestions-panel">
-          <h3>💡 Sugerencias de Intercambio</h3>
+          <h3>Sugerencias de Intercambio</h3>
           <p className="suggestions-intro">
             Intercambios que mejorarían el balance sin alterar demasiado los equipos:
           </p>
@@ -104,7 +167,7 @@ export default function TeamDisplay({ teams, config, onReset }) {
 
       {config.useRating && suggestions.length === 0 && (
         <div className="suggestions-panel no-suggestions">
-          <h3>✅ Equipos Perfectamente Balanceados</h3>
+          <h3>Equipos Perfectamente Balanceados</h3>
           <p>No hay intercambios que mejoren significativamente el equilibrio actual.</p>
         </div>
       )}
@@ -124,13 +187,15 @@ export default function TeamDisplay({ teams, config, onReset }) {
             <ul className="player-list">
               {team.map(player => {
                 const isCaptain = config.ratings?.[player]?.isCaptain;
+                const isSelected = selectedPlayers.some(p => p.player === player);
                 return (
                   <li 
                     key={player} 
-                    className={`player-item ${isCaptain ? 'captain' : ''}`}
+                    className={`player-item ${isCaptain ? 'captain' : ''} ${isSelected ? 'selected' : ''} clickable`}
+                    onClick={() => handlePlayerClick(player, index)}
                   >
                     <span className="player-info">
-                      {isCaptain && <span className="captain-badge">👑</span>}
+                      {isCaptain && <span className="captain-badge">C</span>}
                       {player}
                     </span>
                     {config.ratings && (
@@ -154,7 +219,7 @@ export default function TeamDisplay({ teams, config, onReset }) {
       )}
 
       <button onClick={onReset} className="btn-reset">
-        ← Crear Nuevos Equipos
+        Crear Nuevos Equipos
       </button>
     </div>
   );

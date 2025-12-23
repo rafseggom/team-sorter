@@ -1,17 +1,17 @@
-# ⚽ Team Sorter
+# Team Sorter
 
 Aplicación web para crear equipos balanceados de forma automática. Perfecta para fútbol, baloncesto y cualquier deporte o actividad en equipo.
 
-## ✨ Características
+## Características
 
-- 🎯 **Distribución inteligente**: Crea equipos equilibrados basándose en ratings
-- 👑 **Sistema de capitanes**: Asegura que los capitanes estén en equipos diferentes
-- 💡 **Sugerencias automáticas**: Recomienda intercambios que mejoran el balance
-- 🌙 **Modo oscuro elegante**: Diseño moderno y agradable a la vista
-- 📱 **Responsive**: Funciona perfectamente en móviles, tablets y desktop
-- 🚀 **Sin backend**: Todo funciona en el navegador
+- **Distribución inteligente**: Crea equipos equilibrados basándose en ratings de jugadores
+- **Sistema de capitanes**: Asegura que los capitanes estén siempre en equipos diferentes
+- **Sugerencias automáticas**: Recomienda intercambios que mejoran el balance de equipos
+- **Modo oscuro elegante**: Diseño moderno y agradable a la vista
+- **Responsive**: Funciona perfectamente en móviles, tablets y desktop
+- **Sin backend**: Todo funciona directamente en el navegador
 
-## 🎮 Cómo usar
+## Cómo usar
 
 1. **Configuración inicial**
    - Indica el número de equipos
@@ -27,14 +27,15 @@ Aplicación web para crear equipos balanceados de forma automática. Perfecta pa
    - Visualiza los equipos balanceados
    - Revisa el rating total de cada equipo
    - Consulta las sugerencias de intercambio
+   - Permite intercambiar personas "en caliente" y actualiza el rating.
 
-## 🛠️ Tecnologías
+## Tecnologías
 
 - React 19
 - Vite
 - CSS moderno (Variables CSS, Gradientes, Glassmorphism)
 
-## 🚀 Desarrollo
+## Desarrollo
 
 ```bash
 # Instalar dependencias
@@ -47,21 +48,10 @@ npm run dev
 npm run build
 ```
 
-## 📦 Desplegar en GitHub Pages
-
-Ver instrucciones detalladas en [DEPLOY.md](DEPLOY.md)
-
-## 🎨 Diseño
-
-- Modo oscuro con gradientes azules y violetas
-- Tarjetas con efecto glassmorphism
-- Animaciones suaves y transiciones
-- Sistema de sugerencias visual e intuitivo
-
-## 📝 Licencia
+## Licencia
 
 MIT
 
 ---
 
-Creado con ❤️ para organizar mejores partidos
+Creado para organizar mejores partidos

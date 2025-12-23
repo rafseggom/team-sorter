@@ -15,6 +15,66 @@
   font-weight: 700;
 }
 
+.swap-panel {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px var(--shadow);
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.swap-info {
+  flex: 1;
+  min-width: 250px;
+}
+
+.swap-info p {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.btn-swap {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--accent-success), #059669);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-swap:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.btn-cancel {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
 .suggestions-panel {
   background: var(--bg-secondary);
   padding: 2rem;
@@ -209,6 +269,16 @@
 .player-item:hover {
   background: var(--bg-secondary);
   border-color: var(--accent-primary);
+}
+
+.player-item.clickable {
+  cursor: pointer;
+}
+
+.player-item.selected {
+  border-color: var(--accent-primary);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
 }
 
 .player-item.captain {

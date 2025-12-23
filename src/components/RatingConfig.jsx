@@ -54,7 +54,7 @@ export default function RatingConfig({ config, onNext }) {
               checked={useRating}
               onChange={(e) => setUseRating(e.target.checked)}
             />
-            <span>¿Usar sistema de Rating?</span>
+            <span>Usar sistema de Rating</span>
           </label>
           <p className="toggle-description">
             {useRating 
@@ -71,17 +71,27 @@ export default function RatingConfig({ config, onNext }) {
                 <div key={player} className="player-rating-card">
                   <div className="player-name">{player}</div>
                   
-                  <div className="rating-controls">
-                    <label>
-                      Rating:
+                  <div className="rating-section">
+                    <div className="rating-slider-container">
+                      <label>Rating: <span className="rating-value">{playerRatings[player].rating}</span></label>
                       <input
-                        type="number"
+                        type="range"
                         min="0"
                         max="10"
                         value={playerRatings[player].rating}
                         onChange={(e) => handleRatingChange(player, e.target.value)}
+                        className="rating-slider"
+                        style={{
+                          background: `linear-gradient(to right, 
+                            ${playerRatings[player].rating <= 3 ? '#ef4444' : 
+                              playerRatings[player].rating <= 7 ? '#f59e0b' : '#10b981'} 0%, 
+                            ${playerRatings[player].rating <= 3 ? '#ef4444' : 
+                              playerRatings[player].rating <= 7 ? '#f59e0b' : '#10b981'} ${playerRatings[player].rating * 10}%, 
+                            var(--bg-secondary) ${playerRatings[player].rating * 10}%, 
+                            var(--bg-secondary) 100%)`
+                        }}
                       />
-                    </label>
+                    </div>
 
                     <label className="captain-checkbox">
                       <input
@@ -92,13 +102,6 @@ export default function RatingConfig({ config, onNext }) {
                       <span>Capitán</span>
                     </label>
                   </div>
-
-                  <div className="rating-indicator">
-                    <div 
-                      className="rating-bar" 
-                      style={{ width: `${playerRatings[player].rating * 10}%` }}
-                    />
-                  </div>
                 </div>
               ))}
             </div>
@@ -107,7 +110,7 @@ export default function RatingConfig({ config, onNext }) {
 
         <div className="form-actions">
           <button type="submit" className="btn-primary">
-            Generar Equipos →
+            Generar Equipos
           </button>
         </div>
       </form>
