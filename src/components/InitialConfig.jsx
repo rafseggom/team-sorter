@@ -38,7 +38,7 @@ export default function InitialConfig({ onNext }) {
 
     const uniqueNames = new Set(names);
     if (uniqueNames.size !== names.length) {
-      setError('Hay nombres duplicados. Por favor, usa nombres únicos.');
+      setError('Hay nombres duplicados. Por favor, usa nombres únicos o diferenciables.');
       return;
     }
 
