@@ -130,7 +130,7 @@ export default function TeamDisplay({ teams: initialTeams, config, onReset }) {
 
       {config.useRating && suggestions.length > 0 && (
         <div className="suggestions-panel">
-          <h3>Sugerencias de Intercambio</h3>
+          <h3>Sugerencias de Intercambio:</h3>
           <p className="suggestions-intro">
             Intercambios que mejorarían el balance sin alterar demasiado los equipos:
           </p>
