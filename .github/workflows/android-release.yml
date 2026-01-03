@@ -41,7 +41,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '21'
 
       # 7. Dar permisos de ejecución a Gradle
       - name: Grant execute permission for gradlew
