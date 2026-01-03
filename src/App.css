@@ -1,7 +1,59 @@
 .app {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.footer {
+  padding: 1.5rem;
+  margin-top: auto; /* Truco para empujarlo al fondo si sobra espacio */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  color: #888; /* Gris suave elegante */
+  font-size: 0.9rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Línea sutil separadora */
+}
+
+.footer p {
+  margin: 0;
+}
+
+.author-link {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+  transition: color 0.2s;
+}
+
+.author-link:hover {
+  color: #646cff; /* El color acento de Vite/React por defecto */
+}
+
+.github-icon {
+  color: inherit;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.github-icon:hover {
+  color: #fff; /* Se ilumina al pasar el ratón */
+  transform: scale(1.1);
 }
