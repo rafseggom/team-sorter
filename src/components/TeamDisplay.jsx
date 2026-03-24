@@ -195,7 +195,13 @@ export default function TeamDisplay({ teams: initialTeams, config, onReset }) {
                     onClick={() => handlePlayerClick(player, index)}
                   >
                     <span className="player-info">
-                      {isCaptain && <span className="captain-badge">C</span>}
+                      {isCaptain && (
+                        <span className="captain-badge" title="Capitán">
+                          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                          </svg>
+                        </span>
+                      )}
                       {player}
                     </span>
                     {config.ratings && (
@@ -218,9 +224,28 @@ export default function TeamDisplay({ teams: initialTeams, config, onReset }) {
         </div>
       )}
 
-      <button onClick={onReset} className="btn-reset">
-        Crear Nuevos Equipos
-      </button>
+      <div className="button-group">
+        <button onClick={onReset} className="btn-reset">
+          Crear Nuevos Equipos
+        </button>
+        <button 
+          onClick={async () => {
+            const text = teams.map((team, index) => 
+              `*Equipo ${String.fromCharCode(65 + index)}:*\n` + 
+              team.map(p => `– ${p}`).join('\n')
+            ).join('\n\n');
+            try {
+              await navigator.clipboard.writeText(text);
+              alert('Copiado al portapapeles!');
+            } catch (err) {
+              alert('Error al copiar al portapapeles');
+            }
+          }} 
+          className="btn-secondary"
+        >
+          Exportar al portapapeles
+        </button>
+      </div>
     </div>
   );
 }

@@ -6,6 +6,8 @@ export default function InitialConfig({ onNext }) {
   const [numTeams, setNumTeams] = useState(2);
   const [playersPerTeam, setPlayersPerTeam] = useState(5);
   const [playerNames, setPlayerNames] = useState('');
+  const [showImport, setShowImport] = useState(false);
+  const [importText, setImportText] = useState('');
   const [error, setError] = useState('');
 
   const currentPlayerCount = playerNames
@@ -84,18 +86,59 @@ export default function InitialConfig({ onNext }) {
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="playerNames">
-            Nombres de jugadores (separados por coma):
-          </label>
-          <textarea
-            id="playerNames"
-            rows="5"
-            placeholder="Juan, María, Pedro, Ana, Luis, Carmen..."
-            value={playerNames}
-            onChange={(e) => setPlayerNames(e.target.value)}
-            required
-          />
+        <div className="form-group" style={{ position: 'relative' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <label htmlFor="playerNames">
+              Nombres de jugadores:
+            </label>
+            <button
+              type="button"
+              className="icon-btn"
+              title="Importar jugadores"
+              onClick={() => setShowImport(!showImport)}
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+              </svg>
+            </button>
+          </div>
+          
+          {showImport && (
+            <div className="import-popover">
+              <textarea
+                className="import-textarea"
+                rows="3"
+                placeholder="Ej: Juan, María, Pedro, Ana..."
+                value={importText}
+                onChange={(e) => setImportText(e.target.value)}
+              />
+              <button
+                type="button"
+                className="btn-secondary"
+                style={{ width: '100%', marginTop: '0.5rem' }}
+                onClick={() => {
+                  if (importText.trim()) {
+                    setPlayerNames(prev => prev ? `${prev},\n${importText}` : importText);
+                    setImportText('');
+                    setShowImport(false);
+                  }
+                }}
+              >
+                Añadir a la lista
+              </button>
+            </div>
+          )}
+
+          <div className="textarea-container" style={{ marginTop: '0.5rem' }}>
+            <textarea
+              id="playerNames"
+              rows="5"
+              placeholder="Escribe los nombres separados por coma..."
+              value={playerNames}
+              onChange={(e) => setPlayerNames(e.target.value)}
+              required
+            />
+          </div>
           <div className="player-count-info">
             <small className="help-text">
               Total necesario: {totalPlayers} jugadores
